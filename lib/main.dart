@@ -74,28 +74,22 @@ class _MyHomePageState extends State<MyHomePage> {
       return videoPage;
     } else if (_currentIndex == 2) {
       personPage ??= new PersonPage();
-      return PersonPage();
+      return personPage;
     }
   }
 
   //底部导航栏items
   var bottomNavigationBarItems = [
     new BottomNavigationBarItem(
-      title: Text(
-        '首页',
-      ),
+      title: Text('首页',),
       icon: Icon(Icons.home,),
     ),
     new BottomNavigationBarItem(
-      title: Text(
-        '发现',
-      ),
+      title: Text('发现',),
       icon: Icon(Icons.explore,),
     ),
     new BottomNavigationBarItem(
-      title: Text(
-        '我',
-      ),
+      title: Text('我',),
       icon: Icon(Icons.perm_identity,),
     ),
   ];
