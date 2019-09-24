@@ -30,6 +30,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  #视频播放
+  video_player: ^0.10.0+2
+  #分享
+  share: ^0.5.3
+  #flutter ui 库
+  flukit: ^1.0.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -44,9 +51,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/ic_launcher.png
-    - images/icon_password.png
-    - images/icon_username.png
+    - images/
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:lexiyang/login_register/login.dart';
 import 'package:flutter/services.dart';
-import 'package:lexiyang/found_video_page/found_video_page_appbar.dart';
-import 'package:lexiyang/home_page/home_page_appbar.dart';
-import 'package:lexiyang/person_page/person_page_appbar.dart';
 import 'package:lexiyang/home_page/home_page_body.dart';
 import 'package:lexiyang/person_page/person_page_body.dart';
 import 'package:lexiyang/found_video_page/found_video_page_body.dart';
@@ -52,17 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
   VideoPage videoPage;
   PersonPage personPage;
 
-  //当前页面appBar样式
-  getCurrentAppBar() {
-    if (_currentIndex == 0) {
-      return homeAppBar;
-    } else if (_currentIndex == 1) {
-      return vedioAppBar;
-    } else if (_currentIndex == 2) {
-      return personAppBar;
-    }
-  }
-
   //当前页面body样式
   getCurrentBoby() {
     if (_currentIndex == 0) {
@@ -94,15 +80,25 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   ];
 
+  //获取底部导航栏的背景颜色
+  getBottomNavigationBarBackgroundColor () {
+    if (_currentIndex == 1) {
+      return Colors.grey;
+    } else {
+      return Colors.white;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getCurrentAppBar(),
+      //appBar: getCurrentAppBar(),
       body: getCurrentBoby(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: bottomNavigationBarItems,
         type: BottomNavigationBarType.fixed,
+        backgroundColor: getBottomNavigationBarBackgroundColor(),
         onTap: ((index) {
           setState(() {
             _currentIndex = index;

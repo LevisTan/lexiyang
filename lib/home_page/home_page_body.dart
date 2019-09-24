@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lexiyang/vo/news_vo.dart';
+import 'package:lexiyang/home_page/home_page_appbar.dart';
 
 
 //显示首页的body部分，顶部为宫格,作为功能入口，共两行，每行四个
@@ -117,10 +118,6 @@ class HomePageState extends State<HomePage> {
     '菜谱' : Colors.green,
   };
 
-  //点击按钮进入的页面
-  Map<String,dynamic> _iconFunction = {
-
-  };
 
   //功能入口子项，上面为图标按钮，下面为文字
   Widget _buildRowItem (IconData icon, String name) {
@@ -140,7 +137,7 @@ class HomePageState extends State<HomePage> {
         children: <Widget>[
           new Padding(padding: EdgeInsets.only(top: 15.0)),
           new Icon(icon,color: color,size: 40.0,),
-          new Text(name,style: TextStyle(fontSize: 20.0),),
+          new Text(name,style: TextStyle(fontSize: 14.0),),
         ],
       ),
     );
@@ -181,7 +178,7 @@ class HomePageState extends State<HomePage> {
   //listview分割线
   Widget _buildSeparated (BuildContext context, int index) {
     //前两行不需要分割线
-    if (index < 2) {
+    if (index < 1) {
       return new Padding(padding: EdgeInsets.all(1.0));
     } else {
       return Divider();
@@ -225,6 +222,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: homeAppBar,
       body: RefreshIndicator(
         onRefresh: _onRefresh,
         child: ListView.separated(
