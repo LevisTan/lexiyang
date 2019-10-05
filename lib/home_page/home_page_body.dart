@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lexiyang/vo/news_vo.dart';
 import 'package:lexiyang/home_page/home_page_appbar.dart';
 import 'package:lexiyang/home_page/calendar/calendar_page.dart';
+import 'package:lexiyang/home_page/telephone/telephone_page.dart';
 
 
 //显示首页的body部分，顶部为宫格,作为功能入口，共两行，每行四个
@@ -127,8 +128,8 @@ class HomePageState extends State<HomePage> {
         //根据不同item进入不同页面
         if (name == '日历') {
           Navigator.push(context, MaterialPageRoute(builder: (context)=> MyCalendar()));
-        } else if (name == '菜谱') {
-          print("菜谱");
+        } else if (name == '电话') {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> TelephonePage()));
         } else {
           print("hahah");
         }

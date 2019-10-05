@@ -6,10 +6,14 @@ import 'package:lexiyang/home_page/home_page_body.dart';
 import 'package:lexiyang/person_page/person_page_body.dart';
 import 'package:lexiyang/found_video_page/found_video_page_body.dart';
 
+import 'package:lexiyang/home_page/telephone/ServiceLocator.dart';
+
 //登录状态，实现自动登录功能
 var loginState;
 
 void main() async {
+  //注册拨打电话服务
+  setupLocator();
   //获取用户登录状态
   SharedPreferences preferences = await SharedPreferences.getInstance();
   loginState = preferences.getBool('login');

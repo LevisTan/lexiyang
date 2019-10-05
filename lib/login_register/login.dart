@@ -66,8 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       new Padding(
-                        padding:
-                        new EdgeInsets.fromLTRB(0.0, 0.0, 5.0, 0.0),
+                        padding: new EdgeInsets.fromLTRB(0.0, 0.0, 5.0, 0.0),
                         child: new Image.asset(
                           'images/icon_username.png',
                           width: 40.0,
