@@ -93,6 +93,11 @@ class DBProvider {
     return await db.delete(tableName, where: '$columnId = ?', whereArgs: [id]);
   }
 
+  Future<int> deleteByPhone(String phone) async {
+    final db = await database;
+    return await db.delete(tableName, where: '$columnPhone = ?', whereArgs: [phone]);
+  }
+
   Future<int> update(ContactDB contact) async {
     final db = await database;
     return await db.update(tableName, contact.toMap(),

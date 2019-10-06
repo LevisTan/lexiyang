@@ -30,13 +30,6 @@ class Contact {
   Contact(this.icon,this.name,this.phoneNumber);
 }
 
-//家人号码数据
-//List<Contact> familyList = <Contact>[
-//  Contact(Icons.perm_identity, "小谭", "15116012566"),
-//  Contact(Icons.perm_identity, "小李", "15116012566"),
-//  Contact(Icons.perm_identity, "小伟", "15116012566"),
-//];
-
 //服务号码数据
 List<Contact> serviceList = <Contact>[
   Contact(Icons.wb_sunny, "天气预报", "121"),

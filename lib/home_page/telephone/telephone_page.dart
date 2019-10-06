@@ -32,6 +32,7 @@ class TelephonePageState extends State<TelephonePage> {
 
   @override
   Widget build(BuildContext context) {
+    //tabbar控制器
     return DefaultTabController(
       length: myTab.length,
       child: Scaffold(
@@ -74,6 +75,7 @@ class ContactListState extends State<ContactList> {
   //将ContactDB对象转换为Contact对象
   //数据库有自增长id,对应的类为ContactDB，而Contact类中有用户头像，不能达到统一，这里转换一下
   contactDB2contact() {
+    _list.clear();
     for (int i=0; i<familyList.length; i++) {
       _list.add(new Contact(Icons.perm_identity, familyList[i].name, familyList[i].phone));
     }
@@ -124,10 +126,42 @@ class ContactListState extends State<ContactList> {
             trailing: IconButton(icon: Icon(Icons.chat_bubble_outline), onPressed: (){_service.sendSms(_list[position].phoneNumber);},iconSize: 20.0,),
             onTap: () {
               _service.call(_list[position].phoneNumber);
-            }
+            },
+            //长按弹出对话框提示是否删除
+            onLongPress: () {
+              //确保只能删除自己添加的联系人，服务电话和紧急电话无法删除
+              if (widget.tab.category == MyConstants.FAMILY) {
+                showAlertDialog(context,position);
+              }
+            },
           ),
         ),
       ),
+    );
+  }
+
+  //弹出对话框，提示是否删除联系人
+  void showAlertDialog(BuildContext context,int position) {
+    NavigatorState navigator= context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
+    debugPrint("navigator is null?"+(navigator==null).toString());
+    //弹出对话框
+    showDialog(
+      context: context,
+      builder: (_) => new AlertDialog(
+        title: new Text("删除联系人"),
+        content: new Text("是否删除该联系人？"),
+        actions:<Widget>[
+          new FlatButton(child:new Text("否"), onPressed: (){
+            Navigator.of(context).pop();
+          },),
+          new FlatButton(child:new Text("是"), onPressed: (){
+            familyList.removeAt(position);
+            DBProvider.db.deleteByPhone(_list[position].phoneNumber);
+            Navigator.of(context).pop();
+            setState(() { });
+          },)
+        ]
+      )
     );
   }
 
