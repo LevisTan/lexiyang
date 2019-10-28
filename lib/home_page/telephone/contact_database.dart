@@ -35,10 +35,12 @@ class ContactDB {
 }
 
 //数据库helper类，提供数据库通用操作
+//单例模式
 class DBProvider {
-  DBProvider._();
 
-  static final DBProvider db = DBProvider._();
+  DBProvider._internal();
+
+  static final DBProvider db = DBProvider._internal();
 
   Database _database;
 
@@ -50,7 +52,7 @@ class DBProvider {
 
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "contact.db");
+    String path = join(documentsDirectory.path, "lxy.db");
     return await openDatabase(path, version: 1, onOpen: (db) {},
       onCreate: (Database db, int version) async {
         await db.execute('''
@@ -88,11 +90,13 @@ class DBProvider {
     return list;
   }
 
+  //按主码删除
   Future<int> delete(int id) async {
     final db = await database;
     return await db.delete(tableName, where: '$columnId = ?', whereArgs: [id]);
   }
 
+  //按电话号码删除
   Future<int> deleteByPhone(String phone) async {
     final db = await database;
     return await db.delete(tableName, where: '$columnPhone = ?', whereArgs: [phone]);

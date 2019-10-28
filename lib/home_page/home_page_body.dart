@@ -3,6 +3,7 @@ import 'package:lexiyang/vo/news_vo.dart';
 import 'package:lexiyang/home_page/home_page_appbar.dart';
 import 'package:lexiyang/home_page/calendar/calendar_page.dart';
 import 'package:lexiyang/home_page/telephone/telephone_page.dart';
+import 'package:lexiyang/home_page/weather/weather_page.dart';
 
 
 //显示首页的body部分，顶部为宫格,作为功能入口，共两行，每行四个
@@ -130,9 +131,9 @@ class HomePageState extends State<HomePage> {
           Navigator.push(context, MaterialPageRoute(builder: (context)=> MyCalendar()));
         } else if (name == '电话') {
           Navigator.push(context, MaterialPageRoute(builder: (context)=> TelephonePage()));
-        } else {
-          print("hahah");
-        }
+        } else if (name == '天气'){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> WeatherPage()));
+        } 
       },
       child: Column(
         children: <Widget>[
@@ -167,7 +168,7 @@ class HomePageState extends State<HomePage> {
         padding: EdgeInsets.all(20.0),
         child: ListTile(
           title: Text(_newsList[index].title),
-          leading: Image.network(_newsList[index].pictureUrl),
+          //leading: Image.network(_newsList[index].pictureUrl),
           //点击进入新闻详情页面
           onTap: null,
         ),

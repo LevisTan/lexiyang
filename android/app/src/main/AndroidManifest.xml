@@ -8,8 +8,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="lexiyang"
-        android:icon="@mipmap/ic_launcher">
+        android:label="乐夕阳"
+        android:icon="@mipmap/lxy1">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

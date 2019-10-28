@@ -13,8 +13,8 @@ class MyTab {
 
 //导航栏中items
 const List<MyTab> myTab = const<MyTab>[
-  const MyTab("服务", MyConstants.SERVICE),
   const MyTab("家人", MyConstants.FAMILY),
+  const MyTab("服务", MyConstants.SERVICE),
   const MyTab("紧急", MyConstants.EMERGENCY)
 ];
 

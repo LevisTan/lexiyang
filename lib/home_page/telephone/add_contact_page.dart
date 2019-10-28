@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'telephone_page.dart';
-import 'database.dart';
+import 'package:lexiyang/home_page/telephone/contact_database.dart';
 
 //添加联系人,目前只能在第一页添加，添加的数据也将显示在第一页
 class AddContact extends StatelessWidget {
@@ -63,7 +63,7 @@ class AddContact extends StatelessWidget {
                   new IconButton(
                     icon: new Icon(Icons.clear, color: Colors.black45),
                     onPressed: () {
-                      phoneController.clear();
+                      nameController.clear();
                     },
                   ),
                 ],
@@ -87,7 +87,7 @@ class AddContact extends StatelessWidget {
                         suffixIcon: new IconButton(
                           icon: new Icon(Icons.clear, color: Colors.black45),
                           onPressed: () {
-                            nameController.clear();
+                            phoneController.clear();
                           },
                         ),
                       ),

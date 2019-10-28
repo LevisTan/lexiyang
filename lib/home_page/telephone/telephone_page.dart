@@ -4,7 +4,7 @@ import 'constants.dart';
 import 'ServiceLocator.dart';
 import 'TelAndSmsService.dart';
 import 'add_contact_page.dart';
-import 'database.dart';
+import 'package:lexiyang/home_page/telephone/contact_database.dart';
 
 //家人联系电话
 List<ContactDB> familyList = [];
@@ -22,6 +22,9 @@ class TelephonePageState extends State<TelephonePage> {
 
   Future<List<ContactDB>> getContacts () async {
     familyList = await DBProvider.db.getAllUser();
+    setState(() {
+
+    });
   }
 
   //从数据库加载家人联系电话
@@ -36,9 +39,11 @@ class TelephonePageState extends State<TelephonePage> {
     return DefaultTabController(
       length: myTab.length,
       child: Scaffold(
+        //endDrawer: Drawer(),
         appBar: AppBar(
           title: Text('联系人'),
           bottom: TabBar(
+            //isScrollable: true,
             tabs: myTab.map((MyTab tab){
               return Tab(text: tab.title,);
             }).toList(),
@@ -102,7 +107,7 @@ class ContactListState extends State<ContactList> {
       floatingActionButton: Container(
         //是第一页则显示fab按钮，否则显示空白
         child: widget.tab.category == MyConstants.FAMILY ?
-        FloatingActionButton(onPressed: () {addContact(context);},child: Icon(Icons.add),) : Container(),
+        FloatingActionButton(onPressed: () {addContact(context);},child: Icon(Icons.add_call),) : Container(),
       ),
     );
   }
@@ -142,9 +147,6 @@ class ContactListState extends State<ContactList> {
 
   //弹出对话框，提示是否删除联系人
   void showAlertDialog(BuildContext context,int position) {
-    NavigatorState navigator= context.rootAncestorStateOfType(const TypeMatcher<NavigatorState>());
-    debugPrint("navigator is null?"+(navigator==null).toString());
-    //弹出对话框
     showDialog(
       context: context,
       builder: (_) => new AlertDialog(
@@ -158,6 +160,7 @@ class ContactListState extends State<ContactList> {
             familyList.removeAt(position);
             DBProvider.db.deleteByPhone(_list[position].phoneNumber);
             Navigator.of(context).pop();
+            //刷新界面
             setState(() { });
           },)
         ]

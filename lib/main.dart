@@ -5,8 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:lexiyang/home_page/home_page_body.dart';
 import 'package:lexiyang/person_page/person_page_body.dart';
 import 'package:lexiyang/found_video_page/found_video_page_body.dart';
-
 import 'package:lexiyang/home_page/telephone/ServiceLocator.dart';
+import 'package:lexiyang/login_register/login_bean.dart';
+import 'package:lexiyang/api/get_sign.dart';
+import 'package:lexiyang/api/url_api.dart';
+import 'package:lexiyang/http/dioutils.dart';
+//import 'package:lexiyang/shared_pref/shared_pref.dart';
 
 //登录状态，实现自动登录功能
 var loginState;
@@ -15,6 +19,7 @@ void main() async {
   //注册拨打电话服务
   setupLocator();
   //获取用户登录状态
+
   SharedPreferences preferences = await SharedPreferences.getInstance();
   loginState = preferences.getBool('login');
   if (loginState == null) {
@@ -91,6 +96,35 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       return Colors.white;
     }
+  }
+
+  updateToken() async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String phoneNumber = preferences.getString('phoneNumber');
+    String password = preferences.getString('password');
+    //时间戳
+    var time = DateTime.now().millisecondsSinceEpoch;
+    Map<String,dynamic> map = {
+      'account' : phoneNumber,
+      'password' : password,
+      'app_sid' : 'lxy',
+      'time' : time,
+    };
+    map['sign'] = MySign.getSign(map);
+    var result = await DioManager.getInstance().post(MyUrls.LOGIN, map);
+    LoginBean loginBean = LoginBean.fromJson(result);
+    //模拟登录成功，保存token
+    if (loginBean.status == 200) {
+      print("======================模拟登录更新token：" + loginBean.payload.token);
+      preferences.setString('token', loginBean.payload.token);
+      preferences.setString('score', loginBean.payload.score);
+    }
+  }
+
+  @override
+  void initState() {
+    //自动登录后，模拟登录请求，更新token
+    updateToken();
   }
 
   @override

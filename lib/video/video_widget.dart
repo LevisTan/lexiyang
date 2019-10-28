@@ -3,6 +3,7 @@ import 'package:share/share.dart';
 import 'event_bus.dart';
 import 'constant.dart';
 import 'video_detail_scene.dart';
+import 'package:lexiyang/found_video_page/found_video_page_body.dart';
 import 'screen.dart';
 import 'package:video_player/video_player.dart';
 
@@ -52,8 +53,8 @@ class VideoWidgetState extends State<VideoWidget> {
     _controller = VideoPlayerController.network(widget.url)
       ..initialize()
       ..setLooping(true).then((_) {
-        if (widget.positionTag == 0 && VideoDetailScene.firstInitTimes == 1) {
-          VideoDetailScene.firstInitTimes = 2;
+        if (widget.positionTag == 0 && VideoPage.firstInitTimes == 1) {
+          VideoPage.firstInitTimes = 2;
           _controller.play();
           videoPrepared = true;
         }
@@ -160,7 +161,7 @@ class VideoWidgetState extends State<VideoWidget> {
 
   //转发事件
   clickShareButton () {
-    Share.share('我是乐夕阳，来自猎风工作室，全民大最好的工作室');
+    Share.share('我是乐夕阳，来自猎风工作室');
   }
 
   //评论事件

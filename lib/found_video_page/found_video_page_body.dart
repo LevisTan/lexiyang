@@ -16,7 +16,7 @@ class VideoPage extends StatefulWidget {
 
 //抖音效果，向下滑动播放下一个视频
 class VideoPageState extends State<VideoPage> {
-  SwiperController _controller = SwiperController();
+  SwiperController _controller = new SwiperController();
 
   var movieList = [
     'http://hotsoon.snssdk.com/hotsoon/item/video/_playback/?video_id=8c03eff5c4e944b7bea6a8b50fc26a08&line=0&watermark=1&app_id=1112',
